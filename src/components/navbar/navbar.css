@@ -17,6 +17,7 @@
     rgba(102, 1, 0, 1) 100%
   );
   margin: 2.5vw;
+  z-index: 100;
 }
 
 @media only screen and (max-width: 600px) {

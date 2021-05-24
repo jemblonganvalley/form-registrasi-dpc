@@ -10,7 +10,7 @@ store.post("/:dpc", async (req, res) => {
 
   const form = await formidable({
     multiples: false,
-    uploadDir: path.join(__dirname, `../../dpc_${dpc}`),
+    uploadDir: path.join(__dirname, `../../static/dpc_${dpc}`),
     maxFileSize: 5 * 1024 * 1024, // 5MB
     keepExtensions: true,
     hash: true,
@@ -44,6 +44,16 @@ store.post("/:dpc", async (req, res) => {
           error: err,
         });
       });
+  });
+});
+
+store.post("/", (req, res) => {
+  const { filter } = req.body;
+  StoreData.getData(filter).then((result) => {
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
   });
 });
 

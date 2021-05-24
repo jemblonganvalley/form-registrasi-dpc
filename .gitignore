@@ -25,3 +25,5 @@ yarn-error.log*
 # photo folder
 /uploads
 /dpc_denpasar
+/static/uploads
+/static/dpc_denpasar

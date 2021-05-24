@@ -24,4 +24,4 @@
 --     informasi_lain varchar NOT NULL
 -- );
 
-ALTER TABLE dpc_denpasar ADD COLUMN email varchar;
+delete from dpc_denpasar where nama="wayan wisnu"

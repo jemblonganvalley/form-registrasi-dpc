@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  width: 100vw;
+  height: auto;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -25,7 +28,15 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: red;
+}
+
+a {
+  color: inherit;
+}
+
+.ant-input:focus {
+  border: red;
 }
 
 @keyframes App-logo-spin {

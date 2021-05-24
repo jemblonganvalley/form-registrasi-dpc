@@ -1,8 +1,8 @@
 const db = require("./connection");
 
 class StoreData {
-  async storeDataMember(data) {
-    return await db("datakader")
+  async storeDataMember(data, dpc) {
+    return await db(`dpc_${dpc}`)
       .insert(data)
       .then((result) => {
         return result;

@@ -1,17 +1,24 @@
 import React from "react";
 import { Space } from "antd";
 import Button from "../../button/Button";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./home.css";
 const Home = () => {
+  const { dpc } = useParams();
   return (
     <main className="home">
       <h3>FORM PENDAFTARAN ANGGOTA BARU</h3>
-      <h1>PDI PERJUANGAN</h1>
+      <h1> DPC PDI PERJUANGAN</h1>
+      <h1 style={{ margin: "0" }}>
+        <b style={{ textTransform: "uppercase" }}>
+          {" "}
+          {dpc || "jakarta selatan"}
+        </b>{" "}
+      </h1>
       <h3>
-        KOTA ADMINISTRASI JAKARTA SELATAN <br /> MASA BAKTI 2020 - 2025
+        <br /> MASA BAKTI 2020 - 2025
       </h3>
-      <Link to="/formpendaftaran">
+      <Link to={`/form-pendaftaran/${dpc}`}>
         <Button
           value="daftar"
           width="200px"

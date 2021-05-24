@@ -1,40 +1,38 @@
 import React, { useState } from "react";
 import { Space, Form, Input, Tooltip, Typography, notification } from "antd";
-import mainConfig from "../../../config/main"
+import mainConfig from "../../../config/main";
 import "./formarea.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MenuForm from "../../menu/MenuForm";
 import axios from "axios";
 import portrait from "../../../assets/potrait.svg";
-const FormArea = () => {
+const FormBali = () => {
   const [image, setImage] = useState(portrait);
+  const { dpc } = useParams();
   const [data, setData] = useState({
     nama: "",
-    tanggal_lahir: "",
-    tempat_lahir: "",
-    nik: "",
-    nama_jalan: "",
-    rt: null,
-    rw: null,
-    no_rumah: null,
-    kecamatan: "",
-    kelurahan: "",
-    kota: "",
-    kode_pos: "",
-    no_telpon_1: "",
-    no_telpon_2: "",
-    email: "",
-    instagram: "",
-    facebook: "",
-    keahlian: "",
-    pekerjaan: "",
-    pendidikan: "",
     photo: "",
-    perekrut: "",
-    no_kta: "",
-    tingkat_pengurus: "",
-    wil_rekrut_rw: 2,
-    wil_rekrut_kelurahan: "",
+    provinsi: "",
+    kabupaten_kota: "",
+    alamat: "",
+    kelurahan: "",
+    kecamatan: "",
+    kode_pos: "",
+    telp_rumah: "",
+    telp_kantor: "",
+    telp_hp: "",
+    email: "",
+    tempat_lahir: "",
+    tanggal_lahir: "",
+    agama: "",
+    status: "menikah",
+    jenis_kelamin: "pria",
+    riwayat_partai: "",
+    riwayat_pdip: "",
+    pendidikan_terakhir: "",
+    pendidikan_informal: "",
+    riwayat_pekerjaan: "",
+    informasi_lain: "",
   });
   const onFinish = (event) => {
     setData({
@@ -69,33 +67,30 @@ const FormArea = () => {
     let formdata = await new FormData();
 
     formdata.append("nama", data.nama);
-    formdata.append("tanggal_lahir", data.tanggal_lahir);
-    formdata.append("tempat_lahir", data.tempat_lahir);
-    formdata.append("nik", data.nik);
-    formdata.append("nama_jalan", data.nama_jalan);
-    formdata.append("rt", data.rt);
-    formdata.append("rw", data.rw);
-    formdata.append("no_rumah", data.no_rumah);
-    formdata.append("kecamatan", data.kecamatan);
-    formdata.append("kelurahan", data.kelurahan);
-    formdata.append("kota", data.kota);
-    formdata.append("kode_pos", data.kode_pos);
-    formdata.append("no_telpon_1", data.no_telpon_1);
-    formdata.append("no_telpon_2", data.no_telpon_2);
-    formdata.append("email", data.email);
-    formdata.append("instagram", data.instagram);
-    formdata.append("facebook", data.facebook);
-    formdata.append("keahlian", data.keahlian);
-    formdata.append("pekerjaan", data.pekerjaan);
-    formdata.append("pendidikan", data.pendidikan);
     formdata.append("photo", data.photo);
-    formdata.append("perekrut", data.perekrut);
-    formdata.append("no_kta", data.no_kta);
-    formdata.append("tingkat_pengurus", data.tingkat_pengurus);
-    formdata.append("wil_rekrut_rw", data.wil_rekrut_rw);
-    formdata.append("wil_rekrut_kelurahan", data.wil_rekrut_kelurahan);
+    formdata.append("kabupaten_kota", data.kabupaten_kota);
+    formdata.append("alamat", data.alamat);
+    formdata.append("provinsi", data.provinsi);
+    formdata.append("kelurahan", data.kelurahan);
+    formdata.append("kecamatan", data.kecamatan);
+    formdata.append("kode_pos", data.kode_pos);
+    formdata.append("telp_rumah", data.telp_rumah);
+    formdata.append("telp_kantor", data.telp_kantor);
+    formdata.append("telp_hp", data.telp_hp);
+    formdata.append("email", data.email);
+    formdata.append("tempat_lahir", data.tempat_lahir);
+    formdata.append("tanggal_lahir", data.tanggal_lahir);
+    formdata.append("agama", data.agama);
+    formdata.append("status", data.status);
+    formdata.append("jenis_kelamin", data.jenis_kelamin);
+    formdata.append("riwayat_partai", data.riwayat_partai);
+    formdata.append("riwayat_pdip", data.riwayat_pdip);
+    formdata.append("pendidikan_terakhir", data.pendidikan_terakhir);
+    formdata.append("pendidikan_informal", data.pendidikan_informal);
+    formdata.append("riwayat_pekerjaan", data.riwayat_pekerjaan);
+    formdata.append("informasi_lain", data.informasi_lain);
 
-    return await axios(`${mainConfig.host}/storeform`, {
+    return await axios(`${mainConfig.host}/storeform/${dpc}`, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -107,7 +102,7 @@ const FormArea = () => {
         if (result.status === 201) {
           openNotification();
           setTimeout(() => {
-            window.location.href = "/";
+            window.location.href = `/${dpc}`;
           }, 1000);
         }
       })
@@ -129,7 +124,7 @@ const FormArea = () => {
         onSubmit={handleSubmit}
       >
         <h1 className="section_title" id="data_personal">
-          Data Personal
+          Form Biodata
         </h1>
         <div className="form_group">
           <label htmlFor="nama">nama lengkap</label>
@@ -146,47 +141,38 @@ const FormArea = () => {
           />
         </div>
 
-        <div className="form_group wrap">
-          <label htmlFor="tanggal_lahir">tanggal lahir</label>
-          <input
-            required
-            type="date"
-            placeholder="tanggal lahir"
-            name="tanggal_lahir"
-            id="tanggal_lahir"
-            onChange={(e) => {
-              onFinish(e);
-            }}
-
-            // value={data.tanggal_lahir}
-          />
-          <label htmlFor="tempat_lahir">tempat lahir</label>
-          <input
-            required
-            type="text"
-            placeholder="tempat lahir"
-            name="tempat_lahir"
-            id="tempat_lahir"
-            value={data.tempat_lahir}
-            onChange={(e) => {
-              onFinish(e);
-            }}
-          />
-        </div>
-
         <div className="form_group">
-          <label htmlFor="nik">no NIK</label>
-          <input
-            required
-            type="text"
-            placeholder="Nomer NIK"
-            name="nik"
-            id="nik"
-            value={data.nik}
-            onChange={(e) => {
-              onFinish(e);
-            }}
-          />
+          <label htmlFor="photo">foto diri</label>
+          <div className="image_input">
+            <input
+              accept="image/x-png,image/jpeg,image/png,image/jpg"
+              multiple={false}
+              required
+              type="file"
+              placeholder="photo"
+              name="photo"
+              id="photo"
+              onChange={(e) => {
+                setData({
+                  ...data,
+                  photo: e.target.files[0],
+                });
+                imageHandler(e);
+              }}
+
+              // value={data.photo}
+            />
+            <img
+              className="image_preview"
+              src={image}
+              alt=""
+              style={{
+                flex: "1",
+                maxHeight: "300px",
+                objectFit: "contain",
+              }}
+            />
+          </div>
         </div>
 
         <h1 className="section_title" id="alamat">
@@ -194,62 +180,28 @@ const FormArea = () => {
         </h1>
 
         <div className="form_group">
-          <label htmlFor="nama_jalan">Jalan / Gang / Perumahan</label>
-          <input
+          <label htmlFor="alamat">Alamat Lengkap</label>
+          <textarea
+            rows={4}
             required
-            type="text"
-            placeholder="Nama Jalan"
-            name="nama_jalan"
-            id="nama_jalan"
-            value={data.nama_jalan}
+            placeholder="Alamat Lengkap"
+            name="alamat"
+            id="alamat"
+            value={data.alamat}
             onChange={(e) => {
               onFinish(e);
             }}
-          />
+          ></textarea>
         </div>
 
-        <div
-          className="form_group wrap"
-          style={{ textAlign: "right", justifyContent: "flex-end" }}
-        >
-          <label htmlFor="rt">rt</label>
+        <div className="form_group">
+          <label htmlFor="provinsi">provinsi</label>
           <input
             required
-            type="number"
-            placeholder="no RT"
-            name="rt"
-            id="rt"
-            value={data.rt}
-            onChange={(e) => {
-              onFinish(e);
-            }}
-          />
-
-          <label htmlFor="rw" style={{ justifyContent: "center" }}>
-            rw
-          </label>
-          <input
-            required
-            type="number"
-            placeholder="no rw"
-            name="rw"
-            id="rw"
-            value={data.rw}
-            onChange={(e) => {
-              onFinish(e);
-            }}
-          />
-
-          <label htmlFor="no_rumah" style={{ justifyContent: "center" }}>
-            no / blok
-          </label>
-          <input
-            required
-            type="number"
-            placeholder="no / blok rumah"
-            name="no_rumah"
-            id="no_rumah"
-            value={data.no_rumah}
+            placeholder="provinsi"
+            name="provinsi"
+            id="provinsi"
+            value={data.provinsi}
             onChange={(e) => {
               onFinish(e);
             }}
@@ -290,14 +242,14 @@ const FormArea = () => {
           className="form_group wrap"
           style={{ textAlign: "right", justifyContent: "flex-end" }}
         >
-          <label htmlFor="kota">kota</label>
+          <label htmlFor="kabupaten_kota">Kabupaten / Kota</label>
           <input
             required
             type="text"
-            placeholder="Kota"
-            name="kota"
-            id="kota"
-            value={data.kota}
+            placeholder="kabupaten_kota"
+            name="kabupaten_kota"
+            id="kabupaten_kota"
+            value={data.kabupaten_kota}
             onChange={(e) => {
               onFinish(e);
             }}
@@ -309,7 +261,7 @@ const FormArea = () => {
           <input
             required
             type="number"
-            placeholder="kode post"
+            placeholder="kode pos"
             name="kode_pos"
             id="kode_pos"
             value={data.kode_pos}
@@ -323,24 +275,34 @@ const FormArea = () => {
           className="form_group wrap"
           style={{ textAlign: "right", justifyContent: "flex-end" }}
         >
-          <label htmlFor="no_telpon_1">no telpon</label>
+          <label htmlFor="telp_rumah">no telpon</label>
           <input
-            required
             type="text"
-            placeholder="no handphone 1"
-            name="no_telpon_1"
-            id="no_telpon_1"
-            value={data.no_telpon_1}
+            placeholder="handphone"
+            name="telp_hp"
+            id="telp_hp"
+            value={data.telp_hp}
             onChange={(e) => {
               onFinish(e);
             }}
           />
           <input
             type="text"
-            placeholder="no handphone 2 / optional"
-            name="no_telpon_2"
-            id="no_telpon_2"
-            value={data.no_telpon_2}
+            placeholder="telepon rumah"
+            name="telp_rumah"
+            id="telp_rumah"
+            value={data.telp_rumah}
+            onChange={(e) => {
+              onFinish(e);
+            }}
+          />
+
+          <input
+            type="text"
+            placeholder="telepon kantor"
+            name="telp_kantor"
+            id="telp_kantor"
+            value={data.telp_kantor}
             onChange={(e) => {
               onFinish(e);
             }}
@@ -362,47 +324,112 @@ const FormArea = () => {
           />
         </div>
 
-        <div
-          className="form_group wrap"
-          style={{ textAlign: "right", justifyContent: "flex-end" }}
-        >
-          <label htmlFor="instagram">Social Media</label>
+        <div className="form_group wrap">
+          <label htmlFor="tempat_lahir">tempat lahir</label>
           <input
             required
             type="text"
-            placeholder="@instagram"
-            name="instagram"
-            id="instagram"
-            value={data.instagram}
+            placeholder="tempat lahir"
+            name="tempat_lahir"
+            id="tempat_lahir"
+            value={data.tempat_lahir}
             onChange={(e) => {
               onFinish(e);
             }}
           />
+          <label htmlFor="tanggal_lahir" style={{ justifyContent: "center" }}>
+            tanggal lahir
+          </label>
+          <input
+            required
+            type="date"
+            placeholder="tanggal lahir"
+            name="tanggal_lahir"
+            id="tanggal_lahir"
+            onChange={(e) => {
+              onFinish(e);
+            }}
+
+            // value={data.tanggal_lahir}
+          />
+        </div>
+
+        <div className="form_group">
+          <label htmlFor="agama">agama</label>
           <input
             required
             type="text"
-            placeholder="@facebook"
-            name="facebook"
-            id="facebook"
-            value={data.facebook}
+            placeholder="agama"
+            name="agama"
+            id="agama"
+            value={data.agama}
             onChange={(e) => {
               onFinish(e);
             }}
           />
         </div>
 
+        <div className="form_group">
+          <label htmlFor="status">status</label>
+          <select
+            style={{
+              width: "100%",
+              height: "35px",
+              padding: "0 8px",
+            }}
+            value={data.status}
+            required
+            placeholder="status"
+            name="status"
+            id="status"
+            value={data.status}
+            onChange={(e) => {
+              onFinish(e);
+            }}
+          >
+            <option value="menikah">menikah</option>
+            <option value="single">single</option>
+          </select>
+        </div>
+
+        <div className="form_group">
+          <label htmlFor="jenis_kelamin">jenis kelamin</label>
+          <select
+            style={{
+              width: "100%",
+              height: "35px",
+              padding: "0 8px",
+            }}
+            required
+            value={data.jenis_kelamin}
+            placeholder="jenis_kelamin"
+            name="jenis_kelamin"
+            id="jenis_kelamin"
+            value={data.jenis_kelamin}
+            onChange={(e) => {
+              onFinish(e);
+            }}
+          >
+            <option value="pria">pria</option>
+            <option value="wanita">wanita</option>
+          </select>
+        </div>
+
         <h1 className="section_title" id="data_profesi">
-          Data Profesi Kemampuan Diri & Pendidikan
+          Riwayat Organisasi Kepartaian
         </h1>
 
         <div className="form_group">
-          <label htmlFor="keahlian">keahlian khusus</label>
+          <label htmlFor="riwayat_partai">sebelum masuk PDI Perjuangan</label>
           <textarea
-            type="keahlian"
-            placeholder="keahlian khusus"
-            name="keahlian"
-            id="keahlian"
-            value={data.keahlian}
+            rows={4}
+            placeholder={`1. ....
+2. ....
+3. ....
+            `}
+            name="riwayat_partai"
+            id="riwayat_partai"
+            value={data.riwayat_partai}
             onChange={(e) => {
               onFinish(e);
             }}
@@ -410,14 +437,31 @@ const FormArea = () => {
         </div>
 
         <div className="form_group">
-          <label htmlFor="pekerjaan">pekerjaan</label>
+          <label htmlFor="riwayat_pdip">PDI Perjuangan</label>
+          <textarea
+            rows={4}
+            placeholder={`1. ....
+2. ....
+3. ....
+            `}
+            name="riwayat_pdip"
+            id="riwayat_pdip"
+            value={data.riwayat_pdip}
+            onChange={(e) => {
+              onFinish(e);
+            }}
+          ></textarea>
+        </div>
+
+        <div className="form_group">
+          <label htmlFor="pendidikan_terakhir">pendidikan terakhir</label>
           <input
             required
-            type="pekerjaan"
-            placeholder="pekerjaan"
-            name="pekerjaan"
-            id="pekerjaan"
-            value={data.pekerjaan}
+            type="text"
+            placeholder="pendidikan_terakhir"
+            name="pendidikan_terakhir"
+            id="pendidikan_terakhir"
+            value={data.pendidikan_terakhir}
             onChange={(e) => {
               onFinish(e);
             }}
@@ -425,55 +469,63 @@ const FormArea = () => {
         </div>
 
         <div className="form_group">
-          <label htmlFor="pendidikan">pendidikan</label>
-          <input
+          <label htmlFor="pendidikan_informal">pendidikan informal</label>
+          <textarea
+            rows={4}
             required
-            type="pendidikan"
-            placeholder="pendidikan"
-            name="pendidikan"
-            id="pendidikan"
-            value={data.pendidikan}
+            placeholder={`1. ...
+2. ...
+3. ...
+          `}
+            name="pendidikan_informal"
+            id="pendidikan_informal"
+            value={data.pendidikan_informal}
             onChange={(e) => {
               onFinish(e);
             }}
-          />
+          ></textarea>
         </div>
 
         <div className="form_group">
-          <label htmlFor="photo">photo</label>
-          <div className="image_input">
-            <input
-              accept="image/x-png,image/jpeg,image/png,image/jpg"
-              multiple={false}
-              required
-              type="file"
-              placeholder="photo"
-              name="photo"
-              id="photo"
-              onChange={(e) => {
-                setData({
-                  ...data,
-                  photo: e.target.files[0],
-                });
-                imageHandler(e);
-              }}
-
-              // value={data.photo}
-            />
-            <img
-              className="image_preview"
-              src={image}
-              alt=""
-              style={{
-                flex: "1",
-                maxHeight: "300px",
-                objectFit: "contain",
-              }}
-            />
-          </div>
+          <label htmlFor="riwayat_pekerjaan">riwayat pekerjaan</label>
+          <textarea
+            rows={4}
+            required
+            placeholder={`1. ...
+2. ...
+3. ...
+            `}
+            name="riwayat_pekerjaan"
+            id="riwayat_pekerjaan"
+            value={data.riwayat_pekerjaan}
+            onChange={(e) => {
+              onFinish(e);
+            }}
+          ></textarea>
         </div>
 
-        <h1 className="section_title" id="data_rekrutment">
+        <div className="form_group">
+          <label htmlFor="informasi_lain">informasi lainnya</label>
+          <textarea
+            rows={4}
+            placeholder={``}
+            name="informasi_lain"
+            id="informasi_lain"
+            value={data.informasi_lain}
+            onChange={(e) => {
+              onFinish(e);
+            }}
+          ></textarea>
+        </div>
+
+        <div className="form_group">
+          <p>
+            Demikian biodata ini saya buat dengan sebenarnya, untuk dapat
+            dipergunakan sebagaimana mestinya.{" "}
+          </p>
+        </div>
+
+        {/* <h1 className="section_title" id="data_rekrutment">
           Data Rekrutment
         </h1>
         <i>Diisi Oleh Petugas Partai</i>
@@ -553,7 +605,7 @@ const FormArea = () => {
               onFinish(e);
             }}
           />
-        </div>
+        </div> */}
 
         <div className="form_group">
           <button className="submit_button" type="submit">
@@ -573,4 +625,4 @@ const FormArea = () => {
   );
 };
 
-export default FormArea;
+export default FormBali;

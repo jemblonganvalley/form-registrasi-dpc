@@ -5,12 +5,10 @@ const path = require("path");
 const StoreData = require("../modal/StoreData_modal");
 const uuid = require("uuid").v4;
 
-store.post("/:dpc", async (req, res) => {
-  const { dpc } = req.params;
-
+store.post("/", async (req, res) => {
   const form = await formidable({
     multiples: false,
-    uploadDir: path.join(__dirname, `../../dpc_${dpc}`),
+    uploadDir: path.join(__dirname, "../../uploads"),
     maxFileSize: 5 * 1024 * 1024, // 5MB
     keepExtensions: true,
     hash: true,
@@ -22,14 +20,14 @@ store.post("/:dpc", async (req, res) => {
       photo_name: files.photo.name,
       created_at: new Date().toLocaleDateString(),
     };
-    StoreData.storeDataMember(data, dpc)
+    StoreData.storeDataMember(data)
       .then(() => {
         StoreData.storeImage({
           id: uuid(),
           created_at: new Date().toLocaleString(),
           photo_name: files.photo.name,
           user_email: fields.email,
-          photo_path: `/dpc_${dpc}/${files.photo.name}`,
+          photo_path: `/uploads/${files.photo.name}`,
         });
       })
       .then((result) => {

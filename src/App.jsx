@@ -1,15 +1,19 @@
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import Home from "./components/content/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import FormArea from "./components/content/formarea/FormArea";
+import FormBali from "./components/content/formBali/FormBali";
 import "./assets/theme.less";
+import Home from "./components/content/home/Home";
 function App() {
   return (
     <div className="App">
       <Navbar />
       <Switch>
         <Route path="/formpendaftaran" component={FormArea} />
+        <Route path="/form-pendaftaran/:dpc" component={FormBali} />
+        <Route path="/dpc-denpasar" component={FormBali} />
+        <Route path="/:dpc" component={Home} />
         <Route path="/" component={Home} />
       </Switch>
     </div>

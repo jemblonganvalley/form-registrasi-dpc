@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./datakader.css";
 import { Result, Table } from "antd";
-import { fetchDataKader } from "./dataKader_api";
+import { deleteRegistrasi, fetchDataKader } from "./dataKader_api";
 
 const DataKader = () => {
   const [dataKader, setDataKader] = useState([]);
@@ -17,6 +17,17 @@ const DataKader = () => {
 
     return () => {};
   }, []);
+
+  const reject = (email) => {
+    deleteRegistrasi(email)
+      .then((result) => {
+        console.log(result);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const column = [
     {
@@ -40,10 +51,51 @@ const DataKader = () => {
       key: "telp_hp",
     },
     {
-      title: "photo",
-      dataIndex: "photo_path",
-      key: "photo_path",
-      render: (e) => <img src={e} alt={e} />,
+      title: "alamat",
+      dataIndex: "alamat",
+      key: "alamat",
+    },
+    {
+      title: "provinsi",
+      dataIndex: "provinsi",
+      key: "provinsi",
+    },
+    {
+      title: "approval",
+      dataIndex: "approval",
+      key: "approval",
+      render: (e) => (
+        <div>
+          {e ? (
+            <span style={{ color: "green" }}>approved</span>
+          ) : (
+            <span style={{ color: "orange" }}>waiting</span>
+          )}
+        </div>
+      ),
+    },
+    // {
+    //   title: "photo",
+    //   dataIndex: "photo_path",
+    //   key: "photo_path",
+    //   render: (e) => (
+    //     <img src={"http://localhost:8080/" + e.replace("/", "")} alt={e} />
+    //   ),
+    // },
+    {
+      title: "action",
+      render: (e) => (
+        <>
+          <button>approve</button>
+          <button
+            onClick={() => {
+              reject(e.email);
+            }}
+          >
+            reject
+          </button>
+        </>
+      ),
     },
   ];
 

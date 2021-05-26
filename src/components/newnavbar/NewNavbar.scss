@@ -1,0 +1,497 @@
+@import "../../utilities/variable/variables.scss";
+
+$responsiveSatu: 1085px;
+$responsiveDua: 1000px;
+$responsiveTiga: 991px;
+
+// min width 1086 and max width 1484
+$minWidth1068: 1086px;
+$maxWidth1484: 1484px;
+
+@mixin respon1484 {
+  @media (min-width: #{$minWidth1068}) and (max-width: #{$maxWidth1484}) {
+    @content;
+  }
+}
+// end min width 1086 and max width 1484
+
+// For font navbar
+// min width 1086 and max width 1319
+$maxWidth1319: 1319px;
+
+@mixin respon1319 {
+  @media (min-width: #{$minWidth1068}) and (max-width : #{$maxWidth1319}) {
+    @content;
+  }
+}
+// end min width 1086 and max width 1319
+// end for font navbar
+
+// for logo nav desktop
+// max height 720 and min width 1200px
+$maxHeight720: 720px;
+$minWidth1200: 1200px;
+
+@mixin minWidth1200Logo {
+  @media (max-height: #{$maxHeight720}) and (min-width: #{$minWidth1200}) {
+    @content;
+  }
+}
+// end max height 720 and min width 1200px
+// end for logo nav desktop
+
+// Min widht 500 and Max width 750
+$respon750: 750px;
+$respon500: 500px;
+// END Min widht 500 and Max width 750
+
+@mixin responSatu {
+  @media (max-width : #{$responsiveSatu}) {
+    @content;
+  }
+}
+@mixin responDua {
+  @media (max-width : #{$responsiveDua}) {
+    @content;
+  }
+}
+@mixin responTiga {
+  @media (max-width : #{$responsiveTiga}) {
+    @content;
+  }
+}
+
+// Min widht 500 and Max width 750
+@mixin respon750 {
+  @media (min-width : #{$respon500}) and (max-width: #{$respon750}) {
+    @content;
+  }
+}
+// END Min widht 500 and Max width 750
+
+// Min widht 750 and Max width 991
+$responMin750: 750px;
+$responMax991: 991px;
+// END Min widht 750 and Max width 991
+
+// Min width 750 and max width 991
+@mixin respon991 {
+  @media (min-width: #{$responMin750}) and (max-width: #{$responMax991}) {
+    @content;
+  }
+}
+// END Min widht 750 and max width 991
+
+$smallPhoneSatu: 500px;
+$smallPhoneDua: 400px;
+
+@mixin smallPhone {
+  @media (max-width : #{$smallPhoneSatu}) {
+    @content;
+  }
+}
+@mixin smallPhoneDua {
+  @media (max-width : #{$smallPhoneDua}) {
+    @content;
+  }
+}
+
+$tabletWidth: 751px;
+$tabletWidthMax: 991px;
+
+@mixin ResponsiveTablet {
+  @media (min-width : #{$tabletWidth}) and (max-width : #{$tabletWidthMax}) {
+    @content;
+  }
+}
+
+.navbar {
+  padding: $paddingSmall;
+  background-color: #aa0000;
+  // border-bottom: 0.5 solid grey;
+  //   min-height: 15vh;
+  top: 0px;
+  left: 0px;
+  z-index: 2000111111111;
+  width: 100%;
+  transition: 0.4s;
+  background-position: top;
+  // box-shadow: -1px 7px 30px -12px rgba(0,0,0,0.75);
+
+  // min width 1086 and max width 1484
+  @include respon1484() {
+    padding: 10px 5%;
+  }
+
+  // Respon 991
+  @include respon991() {
+    padding: 1rem 0;
+  }
+  // END Respon 991
+
+  // Respon 750
+  @include respon750() {
+    padding: 10px 0%;
+  }
+  // END Respon 750
+
+  // Respon 500
+  @include smallPhone() {
+    padding: 5px 0% 5px 0%;
+  }
+  // END Respon 500
+
+  .container-fluid {
+    @include responSatu() {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    @include respon991() {
+    }
+
+    @include respon750() {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    @include smallPhone() {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .navbar-collapse {
+    @include responTiga() {
+      text-align: left;
+    }
+
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .navbar-brand {
+    img {
+      margin: 10px;
+      // font-weight: 800;
+
+      @include respon1319() {
+        margin: 10px 0;
+      }
+
+      // max height 720px and min width 1200px
+      @include minWidth1200Logo() {
+        margin: 0;
+        width: 50px;
+      }
+
+      // min width 750px and max width 991px
+      @include respon991() {
+        margin: 10px 0 10px 65px;
+      }
+      // end min width 750px and max width 991px
+
+      // Respon 750
+      @include respon750() {
+        width: 200px;
+        margin: 10px 0 10px 30px;
+      }
+      // END Respon 750
+
+      // Respon 500px
+      @include smallPhone() {
+        width: 150px;
+        margin: 10px 0 10px 20px;
+      }
+      // END Respon 500px
+    }
+  }
+
+  .navbar-toggler {
+    @include respon991() {
+    }
+
+    @include respon750() {
+      margin: 0 6% 0 0;
+    }
+
+    @include smallPhone() {
+      margin: 0 20px 0 0;
+    }
+  }
+
+  .navbar-nav {
+    display: flex;
+    position: relative;
+    list-style: none;
+    z-index: 111111;
+
+    li {
+      font-size: 12pt;
+      text-transform: uppercase;
+      // font-weight: 300;
+      transition: 0.3s;
+      color: #202020;
+      font-weight: 500;
+
+      // min width 1086 and max width 1319px
+      @include respon1319() {
+        font-size: 9pt;
+      }
+      // end min width 1086 and max width 1319px
+
+      @include responSatu() {
+        font-size: 8pt;
+      }
+      @include responTiga() {
+        font-size: 10pt;
+      }
+
+      // min width 750px and max width 991px
+      @include respon991() {
+      }
+      // end min width 750px and max width 991px
+
+      // Respon 750
+      @include respon750() {
+        font-size: 10pt;
+        margin-left: 0px;
+      }
+      // END Respon 750
+
+      // Respon 500
+      @include smallPhone() {
+        width: 100%;
+        font-size: 10pt;
+        margin-left: 0px;
+      }
+      // END Respon 500
+      a {
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.5);
+        transition: 0.3s;
+
+        &:hover {
+          color: #ffffff;
+        }
+
+        @include respon991() {
+        }
+
+        @include respon750() {
+          margin: 0 5% 0 40px;
+        }
+
+        @include smallPhone() {
+        }
+      }
+      .active {
+        color: #ffffff;
+      }
+    }
+
+    // dropdown menu mobile
+    .dropdown-menu-mobile {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background: #333;
+      z-index: 1111;
+      overflow: hidden;
+
+      @include respon991() {
+      }
+
+      @include respon750() {
+        display: flex;
+      }
+
+      @include smallPhone() {
+        display: flex;
+      }
+
+      .page-menu-drop-mobile {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        font-size: 10pt;
+        list-style: none;
+        padding: 10px 0;
+        text-transform: uppercase;
+        overflow: hidden;
+
+        @include respon991() {
+        }
+
+        @include respon750() {
+          padding: 10px 3%;
+        }
+
+        @include smallPhone() {
+          padding: 10px 10%;
+        }
+      }
+    }
+    // end dropdown menu mobile
+
+    .nav-link {
+      position: relative;
+
+      @include smallPhone() {
+        position: relative;
+      }
+    }
+
+    // Trigger for menu dropdown menu mobile
+    .btn-menu-drop-mobile {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      height: 100%;
+      width: 20%;
+      right: 0;
+
+      @include respon991() {
+      }
+
+      @include respon750() {
+        display: flex;
+      }
+
+      @include smallPhone() {
+        display: flex;
+      }
+
+      .list-btn-menu-drop {
+        display: flex;
+        height: calc(100% / 7);
+        width: auto;
+        justify-content: center;
+        align-items: flex-start;
+
+        // icon menu dropdown
+        #icon-menuDrop {
+          display: flex;
+          font-size: 13pt;
+          color: #f3f3f3;
+          padding: 5px;
+        }
+      }
+    }
+    // end trigger for menu dropdown menu mobile
+  }
+
+  form {
+    position: relative;
+
+    // min width 750px and max width 991px
+    @include respon991() {
+      padding: 0px 25px 30px 30px;
+      width: 100%;
+    }
+    // end min width 750px and max width 991px
+
+    // Min widht 500 and max widht 750
+    @include respon750() {
+      margin: 15px 30px 30px 30px;
+      width: 100%;
+      padding: 0 60px 0 0;
+    }
+    // END Min width 500 and max widht 750
+
+    // Max width 500
+    @include smallPhone() {
+      width: 100%;
+      margin-top: 15px;
+      padding: 0px 25px 30px 30px;
+    }
+    // END Max widht 500
+  }
+
+  .form-control {
+    border-radius: 25px;
+    // font-size: 10px;
+    font-weight: 300;
+    font-style: italic;
+    background-color: #fff;
+    color: #000;
+    width: 200px;
+    border: none;
+    padding: 0 40px 0 10px;
+    font-size: small;
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(237, 29, 36, 0.25);
+      border-color: $colors;
+    }
+
+    // min width 1084 and max width 1319px
+    @include respon1319() {
+      width: 180px;
+    }
+    // end min width 1084 and max width 1319px
+
+    // min widht 750px and max width 991px
+    @include respon991() {
+      width: 100%;
+    }
+    // end min width 750px and max width 950px
+
+    // min widht 500px and max width 750px
+    @include respon750() {
+      width: 100%;
+      padding: 0 40px 0 10px;
+      margin: 0;
+    }
+    // end min width 500px and max width 750px
+
+    @include smallPhone() {
+      width: 100%;
+      padding: 0 40px 0 10px;
+    }
+  }
+  .btn-next {
+    border: none;
+    background: transparent;
+    color: #000;
+    font-size: 15pt;
+
+    @include respon991() {
+      position: relative;
+    }
+  }
+
+  .btn-next[name="submit"] {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+
+    @include respon991() {
+      right: 6%;
+      bottom: 15%;
+      position: relative;
+    }
+
+    @include respon750() {
+      position: relative;
+      right: 40px;
+      top: 3px;
+    }
+
+    @include smallPhone() {
+      right: 45px;
+      top: 3px;
+    }
+  }
+
+  ::placeholder {
+    color: #000;
+    padding: 0px;
+  }
+}
+
+// When Scroll Down
+// #navbar{
+//     box-shadow: -1px 7px 30px -12px rgba(0,0,0,0.75);
+// }
+// END When Scroll Down

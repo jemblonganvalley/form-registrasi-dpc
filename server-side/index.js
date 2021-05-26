@@ -34,6 +34,7 @@ app.use("/", home);
 app.use("/formpendaftaran", frm);
 app.use("/api/storeform", store);
 app.use("/api/getalldata", store);
+app.use("/api/deleteRegistration", store);
 
 app.listen(PORT, () => {
   console.log("listen port " + PORT);

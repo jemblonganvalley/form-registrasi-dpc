@@ -24,4 +24,8 @@
 --     informasi_lain varchar NOT NULL
 -- );
 
-delete from dpc_denpasar where nama="wayan wisnu"
+-- delete from photo where user_email="admin@admin.com"
+
+-- delete from datakader
+
+alter table dpc_denpasar add column approval integer

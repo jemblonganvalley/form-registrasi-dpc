@@ -48,10 +48,10 @@ const MenuForm = () => {
             scrollWidthOffset(el);
           }}
         >
-          Profesi Dan Kemampuan
+          Riwayat Organisasi
         </NavHashLink>
       </div>
-
+      {/* 
       <div className="menu_item">
         <NavHashLink
           to="#data_rekrutment"
@@ -64,7 +64,7 @@ const MenuForm = () => {
         >
           Data Rekrutment
         </NavHashLink>
-      </div>
+      </div> */}
     </div>
   );
 };

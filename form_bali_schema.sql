@@ -1,5 +1,5 @@
 -- CREATE TABLE
--- CREATE TABLE dpc_denpasar(
+-- CREATE TABLE dpc_kota_denpasar(
 --     id integer PRIMARY KEY,
 --     nama varchar NOT NULL ,
 --     provinsi varchar NOT NULL,
@@ -28,4 +28,13 @@
 
 -- delete from datakader
 
-alter table dpc_denpasar add column approval integer
+-- alter table dpc_denpasar rename dpc_kota_denpasar
+
+-- DROP TABLE dpc_denpasar
+
+-- ALTER TABLE dpc_kabupaten_tabanan ADD COLUMN created_at CURRENT_TIMESTAMP;
+-- ALTER TABLE dpc_kabupaten_tabanan ADD COLUMN email VARCHAR;
+-- ALTER TABLE dpc_kabupaten_tabanan ADD COLUMN photo_name VARCHAR;
+
+ALTER TABLE dpc_kabupaten_tabanan REPLACE COLUMN email VARCHAR;
+

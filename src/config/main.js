@@ -1,4 +1,4 @@
 export default {
-  host: "https://jvalleyserver.net/api",
+  host: "http://localhost:8080/api",
   port: "8080",
 };

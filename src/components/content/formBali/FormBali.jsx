@@ -6,9 +6,12 @@ import { Link, useParams } from "react-router-dom";
 import MenuForm from "../../menu/MenuForm";
 import axios from "axios";
 import portrait from "../../../assets/potrait.svg";
+import ModalInfo from "../../../components/modalInfo/ModalInfo"
+
 const FormBali = () => {
+  const [modal, setModal] = useState(false)
   const [image, setImage] = useState(portrait);
-  const { dpc } = useParams();
+  const { kota, dpc } = useParams();
   const [data, setData] = useState({
     nama: "",
     photo: "",
@@ -48,7 +51,7 @@ const FormBali = () => {
       onClick: () => {
         console.log("Notification Clicked!");
       },
-      placement: "bottomRight",
+      placement: "topRight",
     });
   };
 
@@ -63,7 +66,7 @@ const FormBali = () => {
 
   const handleSubmit = async (e) => {
     console.log(data.photo);
-    e.preventDefault();
+    // e.preventDefault();
     let formdata = await new FormData();
 
     formdata.append("nama", data.nama);
@@ -90,7 +93,7 @@ const FormBali = () => {
     formdata.append("riwayat_pekerjaan", data.riwayat_pekerjaan);
     formdata.append("informasi_lain", data.informasi_lain);
 
-    return await axios(`${mainConfig.host}/storeform/${dpc}`, {
+    return await axios(`${mainConfig.host}/storeform/${dpc.toLowerCase()}`, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -101,6 +104,7 @@ const FormBali = () => {
       .then((result) => {
         if (result.status === 201) {
           openNotification();
+          console.log(result.data)
           setTimeout(() => {
             window.location.href = `/${dpc}`;
           }, 1000);
@@ -116,15 +120,19 @@ const FormBali = () => {
     <main className="form_area">
       <MenuForm />
 
+      {modal && (
+        <ModalInfo data={data} action={{ handleSubmit, setModal }} dpc={dpc} />
+      )}
+
       <form
         className="form_register"
         action="api/storeform"
         encType="multipart/form-data"
         method="POST"
-        onSubmit={handleSubmit}
+      // onSubmit={handleSubmit}
       >
         <h1 className="section_title" id="data_personal">
-          Form Biodata
+          Form Pendaftaran Kader PDI Perjuangan DPC <span style={{ textTransform: "capitalize" }}> {dpc && dpc.replace("-", " ")} </span>
         </h1>
         <div className="form_group">
           <label htmlFor="nama">nama lengkap</label>
@@ -160,7 +168,7 @@ const FormBali = () => {
                 imageHandler(e);
               }}
 
-              // value={data.photo}
+            // value={data.photo}
             />
             <img
               className="image_preview"
@@ -350,7 +358,7 @@ const FormBali = () => {
               onFinish(e);
             }}
 
-            // value={data.tanggal_lahir}
+          // value={data.tanggal_lahir}
           />
         </div>
 
@@ -608,7 +616,9 @@ const FormBali = () => {
         </div> */}
 
         <div className="form_group">
-          <button className="submit_button" type="submit">
+          <button className="submit_button" type="button" onClick={() => {
+            setModal(true)
+          }}>
             submit
           </button>
           <button

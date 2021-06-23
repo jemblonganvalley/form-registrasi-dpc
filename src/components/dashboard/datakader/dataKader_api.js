@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../../../config/main";
 
-export async function fetchDataKader() {
+export async function fetchDataKader(dpc) {
   return await axios(`${config.host}/getalldata`, {
     method: "POST",
     headers: {
@@ -10,7 +10,7 @@ export async function fetchDataKader() {
     },
     data: {
       filter: {
-        dpc: "denpasar",
+        dpc: {dpc},
       },
     },
   })

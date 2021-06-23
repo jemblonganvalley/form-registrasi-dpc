@@ -2,20 +2,22 @@ import React, { useEffect, useState } from "react";
 import "./datakader.css";
 import { Result, Table } from "antd";
 import { deleteRegistrasi, fetchDataKader } from "./dataKader_api";
+import { useParams } from "react-router-dom";
 
 const DataKader = () => {
   const [dataKader, setDataKader] = useState([]);
+  const { dpc } = useParams("dpc")
   useEffect(() => {
-    fetchDataKader()
+    fetchDataKader(dpc)
       .then((result) => {
-        console.warn(result);
+        console.log(result);
         setDataKader(result);
       })
       .catch((err) => {
         console.error(err);
       });
 
-    return () => {};
+    return () => { };
   }, []);
 
   const reject = (email) => {

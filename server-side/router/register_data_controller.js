@@ -33,12 +33,15 @@ store.post("/:dpc", async (req, res) => {
         });
       })
       .then((result) => {
+        console.log(result)
         res.status(201).json({
           success: true,
           data: result,
         });
       })
       .catch((err) => {
+        console.log(err)
+
         res.status(500).json({
           success: false,
           error: err,

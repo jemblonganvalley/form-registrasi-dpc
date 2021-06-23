@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "dpc": "kota denpasar"
+  },
+  {
+    "id": 2,
+    "dpc": "Kabupaten Badung"
+  },
+  {
+    "id": 3,
+    "dpc": "Kabupaten Tabanan"
+  },
+  {
+    "id": 4,
+    "dpc": "Kabupaten Jembrana"
+  },
+  {
+    "id": 5,
+    "dpc": "Kabupaten Karangasem"
+  },
+  {
+    "id": 6,
+    "dpc": "Kabupaten Buleleng"
+  },
+  {
+    "id": 7,
+    "dpc": "Kabupaten Bangli"
+  },
+  {
+    "id": 8,
+    "dpc": "Kabupaten Gianyar"
+  },
+  {
+    "id": 9,
+    "dpc": "Kabupaten Klungkung"
+  }
+]

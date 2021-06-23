@@ -4,6 +4,6 @@ Content-Type: application/json
 
 {
     "filter" : {
-        "dpc" : "denpasar"
+        "dpc" : "kota-denpasar"
     }
 }

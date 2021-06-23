@@ -2,9 +2,11 @@ const db = require("./connection");
 
 class StoreData {
   async storeDataMember(data, dpc) {
-    return await db(`dpc_${dpc}`)
+    console.log(dpc)
+    return await db(`dpc_${dpc.replace("-", "_")}`)
       .insert(data)
       .then((result) => {
+        console.log(result)
         return result;
       })
       .catch((err) => {
@@ -26,22 +28,23 @@ class StoreData {
   async getData(filter) {
     const { dpc } = filter;
     console.log(dpc);
-    return await db("dpc_" + dpc)
-      .join("photo", `dpc_${dpc}.email`, "=", "photo.user_email")
+    return await db("dpc_" + dpc.replace("-","_").toLowerCase())
+      .join("photo", `dpc_${dpc.replace("-","_").toLowerCase()}.email`, "=", "photo.user_email")
       .select(
-        `dpc_${dpc}.nama`,
-        `dpc_${dpc}.alamat`,
-        `dpc_${dpc}.email`,
-        `dpc_${dpc}.alamat`,
-        `dpc_${dpc}.provinsi`,
-        `dpc_${dpc}.approval`,
-        `dpc_${dpc}.telp_hp`,
+        `dpc_${dpc.replace("-","_").toLowerCase()}.nama`,
+        `dpc_${dpc.replace("-","_").toLowerCase()}.alamat`,
+        `dpc_${dpc.replace("-","_").toLowerCase()}.email`,
+        `dpc_${dpc.replace("-","_").toLowerCase()}.provinsi`,
+        `dpc_${dpc.replace("-","_").toLowerCase()}.telp_hp`,
         "photo.photo_path"
       )
       .then((result) => {
+        console.log(result)
         return result;
       })
       .catch((err) => {
+        console.log(err)
+
         return err;
       });
   }

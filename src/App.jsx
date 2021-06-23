@@ -1,5 +1,5 @@
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import FormArea from "./components/content/formarea/FormArea";
 import FormBali from "./components/content/formBali/FormBali";
@@ -11,12 +11,13 @@ function App() {
     <div className="App">
       <Navbar />
       <Switch>
-        <Route path="/dashboard" component={DataKader} />
+        <Route path="/dashboard/:dpc" component={DataKader} />
         <Route path="/formpendaftaran" component={FormArea} />
         <Route path="/form-pendaftaran/:dpc" component={FormBali} />
-        <Route path="/dpc-denpasar" component={FormBali} />
-        <Route path="/:dpc" component={Home} />
-        <Route path="/" component={Home} />
+        <Route path="/:kota/:dpc" component={Home} />
+        <Route path="/">
+          <Redirect to="/bali/kota-denpasar" />
+        </Route>
       </Switch>
     </div>
   );

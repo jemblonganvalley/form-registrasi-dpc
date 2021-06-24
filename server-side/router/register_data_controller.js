@@ -33,14 +33,14 @@ store.post("/:dpc", async (req, res) => {
         });
       })
       .then((result) => {
-        console.log(result)
+        console.log(result);
         res.status(201).json({
           success: true,
           data: result,
         });
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
 
         res.status(500).json({
           success: false,
@@ -62,7 +62,7 @@ store.post("/", (req, res) => {
 
 store.delete("/", (req, res) => {
   const { filter } = req.body;
-  console.log(filter);
+  // console.log(filter);
   StoreData.deleteData(filter)
     .then((result) => {
       res.status(200).json({

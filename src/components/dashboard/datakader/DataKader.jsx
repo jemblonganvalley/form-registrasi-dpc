@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const DataKader = () => {
   const [dataKader, setDataKader] = useState([]);
-  const { dpc } = useParams("dpc")
+  const { dpc } = useParams("dpc");
   useEffect(() => {
     fetchDataKader(dpc)
       .then((result) => {
@@ -17,11 +17,11 @@ const DataKader = () => {
         console.error(err);
       });
 
-    return () => { };
+    return () => {};
   }, []);
 
-  const reject = (email) => {
-    deleteRegistrasi(email)
+  const reject = (filter) => {
+    deleteRegistrasi(filter)
       .then((result) => {
         console.log(result);
         window.location.reload();
@@ -91,7 +91,12 @@ const DataKader = () => {
           <button>approve</button>
           <button
             onClick={() => {
-              reject(e.email);
+              // console.log(e);
+              reject({
+                id: e.id,
+                token: "fadliselaz",
+                dpc: dpc,
+              });
             }}
           >
             reject

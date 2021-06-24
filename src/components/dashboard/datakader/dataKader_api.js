@@ -10,7 +10,7 @@ export async function fetchDataKader(dpc) {
     },
     data: {
       filter: {
-        dpc: {dpc},
+        dpc: dpc,
       },
     },
   })
@@ -22,7 +22,7 @@ export async function fetchDataKader(dpc) {
     });
 }
 
-export async function deleteRegistrasi(email) {
+export async function deleteRegistrasi(filter) {
   return await axios(`${config.host}/deleteRegistration`, {
     method: "DELETE",
     headers: {
@@ -30,13 +30,11 @@ export async function deleteRegistrasi(email) {
       Accept: "application/json",
     },
     data: {
-      filter: {
-        email: email,
-      },
+      filter: filter,
     },
   })
     .then((result) => {
-      return result.data.data;
+      return result;
     })
     .catch((err) => {
       return err;

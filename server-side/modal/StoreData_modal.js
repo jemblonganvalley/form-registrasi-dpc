@@ -2,11 +2,11 @@ const db = require("./connection");
 
 class StoreData {
   async storeDataMember(data, dpc) {
-    console.log(dpc)
+    console.log(dpc);
     return await db(`dpc_${dpc.replace("-", "_")}`)
       .insert(data)
       .then((result) => {
-        console.log(result)
+        console.log(result);
         return result;
       })
       .catch((err) => {
@@ -27,36 +27,44 @@ class StoreData {
 
   async getData(filter) {
     const { dpc } = filter;
-    console.log(dpc);
-    return await db("dpc_" + dpc.replace("-","_").toLowerCase())
-      .join("photo", `dpc_${dpc.replace("-","_").toLowerCase()}.email`, "=", "photo.user_email")
+    // let filDpc = await dpc.dpc;
+    let rep = await dpc.replace("-", "_");
+    return await db("dpc_" + rep.toLowerCase())
+      .join("photo", `dpc_${rep.toLowerCase()}.email`, "=", "photo.user_email")
       .select(
-        `dpc_${dpc.replace("-","_").toLowerCase()}.nama`,
-        `dpc_${dpc.replace("-","_").toLowerCase()}.alamat`,
-        `dpc_${dpc.replace("-","_").toLowerCase()}.email`,
-        `dpc_${dpc.replace("-","_").toLowerCase()}.provinsi`,
-        `dpc_${dpc.replace("-","_").toLowerCase()}.telp_hp`,
+        `dpc_${rep.toLowerCase()}.id`,
+        `dpc_${rep.toLowerCase()}.nama`,
+        `dpc_${rep.toLowerCase()}.alamat`,
+        `dpc_${rep.toLowerCase()}.email`,
+        `dpc_${rep.toLowerCase()}.provinsi`,
+        `dpc_${rep.toLowerCase()}.telp_hp`,
         "photo.photo_path"
       )
       .then((result) => {
-        console.log(result)
+        // console.log(result);
         return result;
       })
       .catch((err) => {
-        console.log(err)
-
+        console.log(err);
         return err;
       });
   }
 
   async deleteData(filter) {
-    return await db("dpc_denpasar")
-      .where(filter)
+    const { dpc, id } = filter;
+    let rep = await dpc.replace("-", "_").toLowerCase();
+    // console.log(rep, id);
+    return await db(`dpc_${rep}`)
+      .where({
+        id: id,
+      })
       .del()
       .then((result) => {
+        console.log(result);
         return result;
       })
       .catch((err) => {
+        console.log(err);
         return err;
       });
   }

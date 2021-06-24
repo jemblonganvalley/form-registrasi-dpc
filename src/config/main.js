@@ -1,4 +1,4 @@
 export default {
-  host: "http://0.0.0.0:8080/api",
+  host: "https://balipdip.perjuangan.id/api",
   port: "8080",
 };

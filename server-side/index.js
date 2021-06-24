@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 8080;
 //middleware
 app.use(express.static(path.join(__dirname, "../static")));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json({limit : "100mb"}));
+app.use(express.json({ limit: "100mb" }));
 app.use(cors());
 
 //view engine
@@ -29,7 +29,7 @@ app.engine(
 );
 
 //router
-app.use("/:dpc", home);
+app.use("/bali/:dpc", home);
 app.use("/", home);
 app.use("/formpendaftaran", frm);
 app.use("/api/storeform", store);

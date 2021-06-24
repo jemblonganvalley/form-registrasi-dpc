@@ -30,6 +30,7 @@ app.engine(
 
 //router
 app.use("/bali/:dpc", home);
+app.use("/dashboard/:dpc", home);
 app.use("/", home);
 app.use("/formpendaftaran", frm);
 app.use("/api/storeform", store);
